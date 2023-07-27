@@ -1,7 +1,15 @@
 #include "test_framework/generic_test.h"
 unsigned long long ClosestIntSameBitCount(unsigned long long x) {
-  // TODO - you fill in here.
-  return 0;
+  int kUnsignedBits = 64; //size of uLL
+  for (int i = 0; i <= kUnsignedBits - 1; ++i)
+  {
+    //check for the two consecutive rightmost bits which are unequal
+    if ((((x >> i) & 1)) != (((x >> (i + 1) & 1)))){
+      x ^= (1ULL << i) | (1ULL << (i+1)); // swap them
+      return x;
+    }
+  }
+  return -1;
 }
 
 int main(int argc, char* argv[]) {

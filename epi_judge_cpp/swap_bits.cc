@@ -1,7 +1,11 @@
 #include "test_framework/generic_test.h"
 long long SwapBits(long long x, int i, int j) {
-  // TODO - you fill in here.
-  return 0;
+  if(((x >> i) & 1) != ((x >> j) & 1))
+  {
+    unsigned long long bit_mask = (1LL << i) | (1LL << j); // book is incorrect, we need to use LL here otherwise we fail large test cases
+    x ^= bit_mask;
+  }
+  return x;
 }
 
 int main(int argc, char* argv[]) {
