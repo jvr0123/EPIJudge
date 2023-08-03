@@ -172,7 +172,7 @@ problem_mapping = {
     "Chapter 05: Arrays": {
         "5.00 Bootcamp: Arrays": {
             "C++: even_odd_array.cc": {
-                "passed": 0,
+                "passed": 1001,
                 "total": 1001
             },
             "Java: EvenOddArray.java": {
@@ -186,7 +186,7 @@ problem_mapping = {
         },
         "5.01 The Dutch national flag problem": {
             "C++: dutch_national_flag.cc": {
-                "passed": 0,
+                "passed": 204,
                 "total": 204
             },
             "Java: DutchNationalFlag.java": {
