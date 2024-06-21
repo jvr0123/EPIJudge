@@ -5,8 +5,16 @@
 using std::shared_ptr;
 
 shared_ptr<ListNode<int>> RemoveDuplicates(const shared_ptr<ListNode<int>>& L) {
-  // TODO - you fill in here.
-  return nullptr;
+  auto curr1{L};
+  while(curr1){
+    auto curr2 {curr1};
+    while(curr2 && curr2->data == curr1->data){
+      curr2 = curr2->next;
+    }
+    curr1->next = curr2;
+    curr1 = curr1->next;
+  }
+  return L;
 }
 
 int main(int argc, char* argv[]) {
