@@ -760,7 +760,7 @@ problem_mapping = {
         },
         "7.06 Delete a node from a singly linked list": {
             "C++: delete_node_from_list.cc": {
-                "passed": 0,
+                "passed": 512,
                 "total": 512
             },
             "Java: DeleteNodeFromList.java": {
