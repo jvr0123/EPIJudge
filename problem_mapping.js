@@ -830,7 +830,7 @@ problem_mapping = {
         },
         "7.11 Test whether a singly linked list is palindromic": {
             "C++: is_list_palindromic.cc": {
-                "passed": 203,
+                "passed": 23,
                 "total": 203
             },
             "Java: IsListPalindromic.java": {
@@ -844,7 +844,7 @@ problem_mapping = {
         },
         "7.12 Implement list pivoting": {
             "C++: pivot_list.cc": {
-                "passed": 0,
+                "passed": 208,
                 "total": 208
             },
             "Java: PivotList.java": {
