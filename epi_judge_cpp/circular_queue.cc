@@ -1,21 +1,31 @@
 #include "test_framework/generic_test.h"
 #include "test_framework/serialization_traits.h"
 #include "test_framework/test_failure.h"
+#include <list>
 class Queue {
  public:
-  Queue(size_t capacity) {}
+  Queue(size_t capacity) : mCapacity{capacity}, mSize{0}{
+  }
   void Enqueue(int x) {
-    // TODO - you fill in here.
+    ++mSize;
+    mQueue.emplace_back(x);
     return;
   }
   int Dequeue() {
-    // TODO - you fill in here.
-    return 0;
+    --mSize;
+    auto back = mQueue.front();
+    mQueue.pop_front();
+    return back;
   }
   int Size() const {
-    // TODO - you fill in here.
-    return 0;
+    return mSize;
   }
+
+private:
+  size_t mCapacity;
+  int mSize;
+  std::list<int> mQueue;
+
 };
 struct QueueOp {
   enum class Operation { kConstruct, kDequeue, kEnqueue, kSize } op;

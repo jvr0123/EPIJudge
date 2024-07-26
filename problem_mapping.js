@@ -958,7 +958,7 @@ problem_mapping = {
         },
         "8.07 Implement a circular queue": {
             "C++: circular_queue.cc": {
-                "passed": 0,
+                "passed": 65,
                 "total": 65
             },
             "Java: CircularQueue.java": {
