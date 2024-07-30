@@ -1,6 +1,6 @@
 #include <stdexcept>
 #include <list>
-#include <map>
+#include <deque>
 
 #include "test_framework/generic_test.h"
 #include "test_framework/serialization_traits.h"
@@ -13,26 +13,26 @@ public:
   void Enqueue(int x)
   {
     mQueue.emplace_back(x);
-    ++mMaxMap[x];
+    while(!mMax.empty() && x > mMax.back())
+      mMax.pop_back();
+    mMax.emplace_back(x);
     return;
   }
   int Dequeue()
   {
     auto top = mQueue.front();
     mQueue.pop_front();
-    if (mMaxMap[top] == 1)
-      mMaxMap.erase(top);
-    else
-      --mMaxMap[top];
+    if(top == mMax.front())
+      mMax.pop_front();
     return top;
   }
   int Max() const
   {
-    return (*mMaxMap.crbegin()).first;
+    return mMax.front();
   }
 
 private:
-  std::map<int, int> mMaxMap{};
+  std::deque<int> mMax{};
   std::list<int> mQueue{};
 };
 struct QueueOp
