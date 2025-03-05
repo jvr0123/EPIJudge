@@ -10,11 +10,29 @@ using std::array;
 using std::stack;
 using std::vector;
 const int kNumPegs = 3;
-vector<vector<int>> ComputeTowerHanoi(int num_rings) {
-  // TODO - you fill in here.
-  return {};
+void hanoi_helper(int num_rings_left, int from_ring, int to_ring, int swap_ring,
+                  std::array<std::stack<int>, kNumPegs> &state,
+                  vector<vector<int>> &moves) {
+  if (num_rings_left) {
+    hanoi_helper(num_rings_left - 1, from_ring, swap_ring, to_ring, state,
+                 moves);
+    state[to_ring].push(state[from_ring].top());
+    state[from_ring].pop();
+    moves.emplace_back(std::vector<int>{from_ring, to_ring});
+    hanoi_helper(num_rings_left - 1, swap_ring, to_ring, from_ring, state,
+                 moves);
+  }
 }
-void ComputeTowerHanoiWrapper(TimedExecutor& executor, int num_rings) {
+vector<vector<int>> ComputeTowerHanoi(int num_rings) {
+  std::array<std::stack<int>, kNumPegs> rings{};
+  for (int i{0}; i < num_rings; ++i) {
+    rings[0].push(i);
+  }
+  std::vector<vector<int>> moves{};
+  hanoi_helper(num_rings, 0, 1, 2, rings, moves);
+  return moves;
+}
+void ComputeTowerHanoiWrapper(TimedExecutor &executor, int num_rings) {
   array<stack<int>, kNumPegs> pegs;
   for (int i = num_rings; i >= 1; --i) {
     pegs[0].push(i);
@@ -23,7 +41,7 @@ void ComputeTowerHanoiWrapper(TimedExecutor& executor, int num_rings) {
   vector<vector<int>> result =
       executor.Run([&] { return ComputeTowerHanoi(num_rings); });
 
-  for (const vector<int>& operation : result) {
+  for (const vector<int> &operation : result) {
     int from_peg = operation[0], to_peg = operation[1];
     if (!pegs[to_peg].empty() && pegs[from_peg].top() >= pegs[to_peg].top()) {
       throw TestFailure("Illegal move from " +
@@ -45,7 +63,7 @@ void ComputeTowerHanoiWrapper(TimedExecutor& executor, int num_rings) {
   }
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
   std::vector<std::string> args{argv + 1, argv + argc};
   std::vector<std::string> param_names{"executor", "num_rings"};
   return GenericTestMain(args, "hanoi.cc", "hanoi.tsv",

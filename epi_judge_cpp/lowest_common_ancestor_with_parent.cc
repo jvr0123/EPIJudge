@@ -26,14 +26,13 @@ BinaryTreeNode<int> *Lca(const unique_ptr<BinaryTreeNode<int>> &node0,
                          const unique_ptr<BinaryTreeNode<int>> &node1) {
   auto d0 = getDepth(node0), d1 = getDepth(node1);
   auto parent0 = node0.get(), parent1 = node1.get();
-  if(d0 > d1){
+  if (d0 > d1) {
     advanceNode(parent0, d0 - d1);
-  }
-  else{
+  } else {
     advanceNode(parent1, d1 - d0);
   }
-  while(parent1 != nullptr && parent0 != nullptr){
-    if(parent1 == parent0)
+  while (parent1 != nullptr && parent0 != nullptr) {
+    if (parent1 == parent0)
       return parent1;
     parent1 = parent1->parent, parent0 = parent0->parent;
   }
