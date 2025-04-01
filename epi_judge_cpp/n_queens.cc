@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "test_framework/generic_test.h"
-using std::vector;
+using std::vector;:
 
 bool is_valid(const std::vector<int> &col_placement) {
   int row = col_placement.size() - 1;
